@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Knots Pulse | Neo Clicker Experience</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Unbounded:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="noise-overlay"></div>
+    <div class="scanline"></div>
+    <div class="ambient-orbs" aria-hidden="true">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <main class="app-shell">
+      <header class="hero hero--stacked">
+        <div class="hero__badge">Кликер Кнота</div>
+        <div>
+          <h1>Knots Pulse</h1>
+          <p>
+            Город ждёт свежего импульса. Кликеры, витрины и перерождения теперь разнесены по
+            чистым страницам, чтобы ничто не отвлекало от ритма.
+          </p>
+        </div>
+        <div class="hero__stats">
+          <div class="stat-card">
+            <span class="label">Энергия</span>
+            <span class="value" id="energyDisplay">0</span>
+          </div>
+          <div class="stat-card">
+            <span class="label">Кредиты</span>
+            <span class="value" id="creditDisplay">0</span>
+          </div>
+          <div class="stat-card">
+            <span class="label">Данные</span>
+            <span class="value" id="dataDisplay">0</span>
+          </div>
+        </div>
+      </header>
+
+      <nav class="deck-nav" aria-label="Навигация по страницам">
+        <button class="deck-tab is-active" data-view-target="core">Пульс</button>
+        <button class="deck-tab" data-view-target="market">Лавка</button>
+        <button class="deck-tab" data-view-target="lab">Игрульки</button>
+        <button class="deck-tab" data-view-target="achievements">Достижения</button>
+        <button class="deck-tab" data-view-target="prestige">Перерождения</button>
+      </nav>
+
+      <section class="view view--core is-active" data-view="core">
+        <div class="core">
+          <button id="pulseCore" class="pulse-button" aria-label="Запустить импульс">
+            <span class="pulse-button__halo"></span>
+            <span class="pulse-button__label">Pulse Core</span>
+          </button>
+          <div class="pulse-button__hint">+<span id="clickValue">1</span> энергии</div>
+          <div class="core__meta">
+            <div>
+              <span class="meta-label">Ударов в секунду</span>
+              <span class="meta-value" id="pps">0.0</span>
+            </div>
+            <div>
+              <span class="meta-label">Сессия</span>
+              <span class="meta-value" id="sessionTime">00:00:00</span>
+            </div>
+            <button id="saveButton" class="ghost-btn ghost-btn--accent">Сохранить</button>
+          </div>
+        </div>
+        <footer class="footer">
+          <div>
+            <strong>История Кнота:</strong> город знает его как архитектора импульсов. Каждый
+            клик — вклад в коллекцию легендарных игрушек.
+          </div>
+          <button id="resetButton" class="ghost-btn ghost-btn--danger">
+            Сбросить цикл
+          </button>
+        </footer>
+      </section>
+
+      <section class="view view--market" data-view="market">
+        <article class="panel panel--shop">
+          <header>
+            <h2>Лавка импульсов</h2>
+            <p>Собери сетап, который заставит счётчики гореть.</p>
+          </header>
+          <div id="shopList" class="panel__list"></div>
+        </article>
+        <article class="panel panel--prestige">
+          <header>
+            <h2>Лавка искр</h2>
+            <p>Тратим очки перерождений на постоянные моды.</p>
+          </header>
+          <div id="prestigeShopList" class="panel__list"></div>
+        </article>
+      </section>
+
+      <section class="view view--lab" data-view="lab">
+        <article class="panel panel--lab">
+          <header>
+            <h2>Игрульки лаборатории</h2>
+            <p>Мини-ритуалы Кнота цепляются к экономике и приносят бусты.</p>
+          </header>
+          <div class="lab-games">
+            <button class="lab-card" data-game="flux">
+              <div>
+                <h3>Flux Dice</h3>
+                <p>Рискни 50 кредитов и получи до 500.</p>
+              </div>
+              <span class="lab-card__cta">Играть</span>
+            </button>
+            <button class="lab-card" data-game="echo">
+              <div>
+                <h3>Echo Trail</h3>
+                <p>Собери цепочку точных кликов за 10 секунд.</p>
+              </div>
+              <span class="lab-card__cta">Запуск</span>
+            </button>
+            <button class="lab-card" data-game="oracle">
+              <div>
+                <h3>Oracle Pulse</h3>
+                <p>Отдай 200 энергии и получи мистический бафф.</p>
+              </div>
+              <span class="lab-card__cta">Призвать</span>
+            </button>
+            <button class="lab-card" data-game="glitch">
+              <div>
+                <h3>Glitch Lock</h3>
+                <p>Запомни код и введи его, пока он не рассыпался.</p>
+              </div>
+              <span class="lab-card__cta">Вскрыть</span>
+            </button>
+            <button class="lab-card" data-game="nova">
+              <div>
+                <h3>Nova Drift</h3>
+                <p>Попади бегунком в цель и сорви буст.</p>
+              </div>
+              <span class="lab-card__cta">Поймать</span>
+            </button>
+          </div>
+        </article>
+      </section>
+
+      <section class="view view--achievements" data-view="achievements">
+        <article class="panel panel--achievements">
+          <header>
+            <h2>Медная доска</h2>
+            <p>Все трофеи подсвечиваются здесь и вспыхивают справа внизу.</p>
+          </header>
+          <div id="achievementList" class="achievements-grid"></div>
+        </article>
+      </section>
+
+      <section class="view view--prestige" data-view="prestige">
+        <article class="panel panel--prestige">
+          <header>
+            <h2>Перерождение</h2>
+            <p>Сжигаем кредиты, берём искры и начинаем свежий цикл.</p>
+          </header>
+          <div class="prestige-stats">
+            <div>
+              <span class="meta-label">Перерождений</span>
+              <span class="meta-value" id="prestigeRuns">0</span>
+            </div>
+            <div>
+              <span class="meta-label">Искры</span>
+              <span class="meta-value" id="prestigePointsDisplay">0</span>
+            </div>
+            <div>
+              <span class="meta-label">Стоимость</span>
+              <span class="meta-value" id="prestigeCost">—</span>
+            </div>
+          </div>
+          <p class="prestige-copy">
+            Каждые 5 000 кредитов превращаются в 1 искру. Перерождение сбрасывает энергию,
+            кредиты и лавку, но сохраняет достижения и всё купленное в лавке искр.
+          </p>
+          <button id="prestigeButton" class="ghost-btn ghost-btn--accent">
+            Переродиться прямо сейчас
+          </button>
+        </article>
+      </section>
+    </main>
+
+    <section class="achievement-feed" aria-live="polite" aria-atomic="true"></section>
+
+    <template id="achievementToast">
+      <div class="achievement-toast">
+        <div class="toast-icon">★</div>
+        <div>
+          <p class="toast-title"></p>
+          <p class="toast-text"></p>
+        </div>
+      </div>
+    </template>
+
+    <div class="easter-eggs">
+      <button id="konamiHint">???</button>
+      <div class="egg-note">6-6-8-6-8-8-4</div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
+
